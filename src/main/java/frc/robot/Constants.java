@@ -82,14 +82,14 @@ public final class Constants {
   }
 
   public static final class AutoConstants {
-    public static final double kMaxSpeedMetersPerSecond = 3;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    public static final double kMaxSpeedMetersPerSecond = 1;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 1;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
 
     public static final double kPXController = 1;
     public static final double kPYController = 1;
-    public static final double kPThetaController = 0.1;
+    public static final double kPThetaController = 1;
 
     // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
@@ -98,5 +98,14 @@ public final class Constants {
 
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676;
+  }
+  public static final class VisionConstants { 
+    public static final String LIMELIGHT_NAME = "limelight";
+    public static final double rotate_to_tag_min = -0.5;
+    public static final double rotate_to_tag_max = 0.5;
+    public static final double p_rotate_to_tag = 0.03;
+    public static final double i_rotate_to_tag = 0;
+    public static final double d_rotate_to_tag = 0;
+    
   }
 }
