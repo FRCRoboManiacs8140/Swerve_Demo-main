@@ -19,6 +19,7 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Commands.AimCommand;
+import frc.robot.Commands.Drive20Feet;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -89,6 +90,11 @@ public class RobotContainer {
     .onTrue(
       new AimCommand(m_robotDrive)
     );
+
+    new JoystickButton(m_driverController, XboxController.Button.kX.value)
+    .onTrue(
+      new Drive20Feet(m_robotDrive, 2)
+    );
   }
 
 
@@ -112,7 +118,7 @@ public class RobotContainer {
         // Pass through these two interior waypoints, making an 's' curve path
         List.of(new Translation2d(1.5, -.5), new Translation2d(2.5, .5)),
         // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(4, 0, new Rotation2d().fromDegrees(0)),
+        new Pose2d(4, 0, new Rotation2d().fromDegrees(90)),
         config);
 
     var thetaController = new ProfiledPIDController(
@@ -132,12 +138,16 @@ public class RobotContainer {
         m_robotDrive);
 
     // Reset odometry to the starting pose of the trajectory.
+    m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
+    /* 
     return Commands.sequence(
     new InstantCommand(() -> m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose())),
     swerveControllerCommand);
-    //new InstantCommand(()->m_robotDrive.drive(0,0,0,false)));
+    
+    return InstantCommand(()->m_robotDrive.drive(0,0,0,false));
+    */
     
     // Run path following command, then stop at the end.
-    //return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0,0,0, false));
+    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0,0,0, false));
   }
 }
