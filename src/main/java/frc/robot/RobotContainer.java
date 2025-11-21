@@ -19,6 +19,7 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Commands.AimCommand;
+import frc.robot.Commands.StrafeCommand;
 import frc.robot.Commands.Drive20Feet;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,7 +28,16 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand; 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.events.EventTrigger;
+import com.pathplanner.lib.path.GoalEndState;
+import com.pathplanner.lib.path.PathConstraints;
+import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.path.Waypoint;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -81,6 +91,7 @@ public class RobotContainer {
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));  
+            
     new JoystickButton(m_driverController, XboxController.Button.kA.value)
         .whileTrue(new RunCommand(
              () -> m_robotDrive.zeroHeading(),
@@ -89,6 +100,11 @@ public class RobotContainer {
     new JoystickButton(m_driverController, XboxController.Button.kB.value)
     .onTrue(
       new AimCommand(m_robotDrive)
+    );
+
+    new JoystickButton(m_driverController, XboxController.Button.kY.value)
+    .onTrue(
+      new StrafeCommand(m_robotDrive)
     );
 
     new JoystickButton(m_driverController, XboxController.Button.kX.value)
@@ -104,6 +120,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    return new PathPlannerAuto("Testing Auto");
+    /* 
     // Create config for trajectory
     TrajectoryConfig config = new TrajectoryConfig(
         AutoConstants.kMaxSpeedMetersPerSecond,
@@ -114,15 +132,14 @@ public class RobotContainer {
     // An example trajectory to follow. All units in meters.
     Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
         // Start at the origin facing the +X direction
-        new Pose2d(0, 0, new Rotation2d()),
+        new Pose2d(0, 0, new Rotation2d(0)),
         // Pass through these two interior waypoints, making an 's' curve path
-        List.of(new Translation2d(1.5, -.5), new Translation2d(2.5, .5)),
-        // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(4, 0, new Rotation2d().fromDegrees(90)),
+        List.of(new Translation2d(2, 0)),
+        new Pose2d(8, 0, new Rotation2d().fromDegrees(0)),
         config);
 
     var thetaController = new ProfiledPIDController(
-        AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
+        AutoConstants.kPThetaController, 0.2, 0, AutoConstants.kThetaControllerConstraints);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
     SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
@@ -145,9 +162,10 @@ public class RobotContainer {
     swerveControllerCommand);
     
     return InstantCommand(()->m_robotDrive.drive(0,0,0,false));
-    */
+    *
     
     // Run path following command, then stop at the end.
     return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0,0,0, false));
+    */
   }
 }

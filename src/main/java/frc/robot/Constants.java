@@ -25,7 +25,7 @@ public final class Constants {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
-    public static final double kMaxSpeedMetersPerSecond = 4.8;
+    public static final double kMaxSpeedMetersPerSecond = 4.2;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
     // Chassis configuration
@@ -89,7 +89,7 @@ public final class Constants {
 
     public static final double kPXController = 0;
     public static final double kPYController = 0;
-    public static final double kPThetaController = 0;
+    public static final double kPThetaController = 0.07;
 
     // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
@@ -103,7 +103,7 @@ public final class Constants {
     public static final String LIMELIGHT_NAME = "limelight";
     public static final double rotate_to_tag_min = -0.5;
     public static final double rotate_to_tag_max = 0.5;
-    public static final double p_rotate_to_tag = 0.03;
+    public static final double p_rotate_to_tag = 0.0225;
     public static final double i_rotate_to_tag = 0;
     public static final double d_rotate_to_tag = 0;
     
