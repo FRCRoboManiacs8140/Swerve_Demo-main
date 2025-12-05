@@ -47,7 +47,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Gyro Angle", m_robotContainer.getRobotDrive().getHeading());
     SmartDashboard.putNumber("posex", m_robotContainer.getRobotDrive().getPose().getX());
     SmartDashboard.putNumber("posey", m_robotContainer.getRobotDrive().getPose().getY());
-    SmartDashboard.putNumber("posetheta", m_robotContainer.getRobotDrive().getPose().getRotation().getDegrees());
+    
+
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

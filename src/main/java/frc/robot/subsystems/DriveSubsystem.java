@@ -25,18 +25,8 @@ import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.pathplanner.lib.util.PathPlannerLogging;
 import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.wpilibj.DriverStation;
-
-
-// import com.pathplanner.lib.auto ;
-// import com.pathplanner.lib.commands;
-// import com.pathplanner.lib.controllers;
-// import com.pathplanner.lib.config; 
-// import com.pathplanner.lib.events; 
-// import com.pathplanner.lib.path;
-// import com.pathplanner.lib.pathfinding; 
-// import com.pathplanner.lib.trajectory; 
-// import com.pathplanner.lib.util;
-// import com.pathplanner.lib.util.swerve; 
+import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.OIConstants;
 
 
 
@@ -79,7 +69,7 @@ public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
     // Usage reporting for MAXSwerve template
-    HAL.report(tResourceType.kResourceType_RobotDrive, tInstances.kRobotDriveSwerve_MaxSwerve);
+    //HAL.report(tResourceType.kResourceType_RobotDrive, tInstances.kRobotDriveSwerve_MaxSwerve);
     
     try{
       config = RobotConfig.fromGUISettings();
@@ -93,9 +83,10 @@ public class DriveSubsystem extends SubsystemBase {
        this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
        this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
        (speeds, feedforwards) -> driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
+       
        new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-               new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-               new PIDConstants(5.0, 0.0, 0.0) // Rotation PID constants
+               new PIDConstants(AutoConstants.kPXController, AutoConstants.kPYController, 0.0), // Translation PID constants
+               new PIDConstants(0, 0.0, AutoConstants.kPThetaController) // Rotation PID constants
        ),
        config, // The robot configuration
        () -> {

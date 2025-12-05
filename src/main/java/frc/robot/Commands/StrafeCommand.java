@@ -48,7 +48,7 @@ public class StrafeCommand extends Command {
   public void execute() {
 
     // If tags are in view, rotate at a speed proportional to the offset robot relative!
-    if (tag_in_view) m_robotDrive.drive(0, limelight_strafe_proportional(), 0, false);
+    if (tag_in_view) m_robotDrive.drive(0, -limelight_strafe_proportional(), 0, false);
 
     // Otherwise we tell it to quit
     else tag_in_view = false;
