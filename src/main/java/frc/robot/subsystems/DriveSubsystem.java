@@ -27,6 +27,16 @@ import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.subsystems.Limelight.LimelightHelpers;
+import edu.wpi.first.math.numbers.N3;
+import edu.wpi.first.math.numbers.N2;
+import edu.wpi.first.math.Vector;
+import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 
 
@@ -65,6 +75,23 @@ public class DriveSubsystem extends SubsystemBase {
           m_rearLeft.getPosition(),
           m_rearRight.getPosition()
       });
+
+    /* Here we use SwerveDrivePoseEstimator so that we can fuse odometry readings. The numbers used
+  below are robot specific, and should be tuned. */
+  private final SwerveDrivePoseEstimator m_poseEstimator =
+  new SwerveDrivePoseEstimator(
+      DriveConstants.kDriveKinematics,
+      Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
+      new SwerveModulePosition[] {
+        m_frontLeft.getPosition(),
+        m_frontRight.getPosition(),
+        m_rearLeft.getPosition(),
+        m_rearRight.getPosition()
+      },
+      new Pose2d(),
+      VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(5)),
+      VecBuilder.fill(0.5, 0.5, Units.degreesToRadians(30)));
+
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
@@ -131,6 +158,69 @@ public class DriveSubsystem extends SubsystemBase {
    * @return The pose.
    */
   public Pose2d getPose() {
+    // First, tell Limelight your robot's current orientation
+//   public void updateOdometry() {
+  m_odometry.update(
+        Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
+        new SwerveModulePosition[] {
+            m_frontLeft.getPosition(),
+            m_frontRight.getPosition(),
+            m_rearLeft.getPosition(),
+            m_rearRight.getPosition()
+        });
+
+
+boolean useMegaTag2 = true; //set to false to use MegaTag1
+boolean doRejectUpdate = false;
+if(useMegaTag2 == false)
+{
+  LimelightHelpers.PoseEstimate mt1 = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+  
+  if(mt1.tagCount == 1 && mt1.rawFiducials.length == 1)
+  {
+    if(mt1.rawFiducials[0].ambiguity > .7)
+    {
+      doRejectUpdate = true;
+    }
+    if(mt1.rawFiducials[0].distToCamera > 3)
+    {
+      doRejectUpdate = true;
+    }
+  }
+  if(mt1.tagCount == 0)
+  {
+    doRejectUpdate = true;
+  }
+
+  if(!doRejectUpdate)
+  {
+    m_poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.5,.5,9999999));
+    m_poseEstimator.addVisionMeasurement(
+        mt1.pose,
+        mt1.timestampSeconds);
+  }
+}
+else if (useMegaTag2 == true)
+{
+  LimelightHelpers.SetRobotOrientation("limelight", m_poseEstimator.getEstimatedPosition().getRotation().getDegrees(), 0, 0, 0, 0, 0);
+  LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
+  if(Math.abs(m_gyro.getRate()) > 720) // if our angular velocity is greater than 720 degrees per second, ignore vision updates
+  {
+    doRejectUpdate = true;
+  }
+  if(mt2.tagCount == 0)
+  {
+    doRejectUpdate = true;
+  }
+  if(!doRejectUpdate)
+  {
+    m_poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
+    m_poseEstimator.addVisionMeasurement(
+        mt2.pose,
+        mt2.timestampSeconds);
+  }
+}
+
     return m_odometry.getPoseMeters();
   }
 

@@ -568,7 +568,7 @@ public class LimelightHelpers {
             this.avgTagDist = 0;
             this.avgTagArea = 0;
             this.rawFiducials = new RawFiducial[]{};
-            this.isMegaTag2 = false;
+            this.isMegaTag2 = true;
         }
 
         public PoseEstimate(Pose2d pose, double timestampSeconds, double latency, 
@@ -779,7 +779,7 @@ public class LimelightHelpers {
     }
 
     /**
-     * Gets the latest raw fiducial/AprilTag detection results from NetworkTables.
+     * Gets the latest raw fiducial/AprilTag detection results frot NetworkTables.
      * 
      * @param limelightName Name/identifier of the Limelight
      * @return Array of RawFiducial objects containing detection details
@@ -1311,7 +1311,7 @@ public class LimelightHelpers {
      * @return
      */
     public static PoseEstimate getBotPoseEstimate_wpiBlue_MegaTag2(String limelightName) {
-        return getBotPoseEstimate(limelightName, "botpose_orb_wpiblue", true);
+        return getBotPoseEstimate(limelightName, "botpose_orb_wpiblue", false);
     }
 
     /**
@@ -1567,6 +1567,7 @@ public class LimelightHelpers {
             validIDsDouble[i] = validIDs[i];
         }        
         setLimelightNTDoubleArray(limelightName, "fiducial_id_filters_set", validIDsDouble);
+        
     }
 
     /**
