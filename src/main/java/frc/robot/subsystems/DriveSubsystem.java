@@ -109,17 +109,17 @@ public class DriveSubsystem extends SubsystemBase {
        this::getPose, // Robot pose supplier
        this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
        this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
-       (speeds, feedforwards) -> driveRobotRelative(
-        new ChassisSpeeds(
-            speeds.vxMetersPerSecond,
-            speeds.vyMetersPerSecond,
-            -speeds.omegaRadiansPerSecond // Invert the rotational velocity
-        )
-    ), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
-       
+       (speeds, feedforwards) -> driveRobotRelative(speeds),
+        // driveRobotRelative(
+        // new ChassisSpeeds(
+        //     speeds.vxMetersPerSecond,
+        //     speeds.vyMetersPerSecond,
+        //     -speeds.omegaRadiansPerSecond // Invert the rotational velocity
+        // ) )
+     // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
        new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-               new PIDConstants(AutoConstants.kPXController, 0, 0.0), // Translation PID constants
-               new PIDConstants(AutoConstants.kPThetaController, 0, 0) // Rotation PID constants
+               new PIDConstants(AutoConstants.kPXController, 0, 0.5), // Translation PID constants
+               new PIDConstants(AutoConstants.kPThetaController, 0, 0.5) // Rotation PID constants
        ),
        config, // The robot configuration
        () -> {
@@ -160,66 +160,66 @@ public class DriveSubsystem extends SubsystemBase {
   public Pose2d getPose() {
     // First, tell Limelight your robot's current orientation
 //   public void updateOdometry() {
-  m_odometry.update(
-        Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
-        new SwerveModulePosition[] {
-            m_frontLeft.getPosition(),
-            m_frontRight.getPosition(),
-            m_rearLeft.getPosition(),
-            m_rearRight.getPosition()
-        });
+//   m_odometry.update(
+//         Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
+//         new SwerveModulePosition[] {
+//             m_frontLeft.getPosition(),
+//             m_frontRight.getPosition(),
+//             m_rearLeft.getPosition(),
+//             m_rearRight.getPosition()
+//         });
 
 
-boolean useMegaTag2 = true; //set to false to use MegaTag1
-boolean doRejectUpdate = false;
-if(useMegaTag2 == false)
-{
-  LimelightHelpers.PoseEstimate mt1 = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+// boolean useMegaTag2 = true; //set to false to use MegaTag1
+// boolean doRejectUpdate = false;
+// if(useMegaTag2 == false)
+// {
+//   LimelightHelpers.PoseEstimate mt1 = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
   
-  if(mt1.tagCount == 1 && mt1.rawFiducials.length == 1)
-  {
-    if(mt1.rawFiducials[0].ambiguity > .7)
-    {
-      doRejectUpdate = true;
-    }
-    if(mt1.rawFiducials[0].distToCamera > 3)
-    {
-      doRejectUpdate = true;
-    }
-  }
-  if(mt1.tagCount == 0)
-  {
-    doRejectUpdate = true;
-  }
+//   if(mt1.tagCount == 1 && mt1.rawFiducials.length == 1)
+//   {
+//     if(mt1.rawFiducials[0].ambiguity > .7)
+//     {
+//       doRejectUpdate = true;
+//     }
+//     if(mt1.rawFiducials[0].distToCamera > 3)
+//     {
+//       doRejectUpdate = true;
+//     }
+//   }
+//   if(mt1.tagCount == 0)
+//   {
+//     doRejectUpdate = true;
+//   }
 
-  if(!doRejectUpdate)
-  {
-    m_poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.5,.5,9999999));
-    m_poseEstimator.addVisionMeasurement(
-        mt1.pose,
-        mt1.timestampSeconds);
-  }
-}
-else if (useMegaTag2 == true)
-{
-  LimelightHelpers.SetRobotOrientation("limelight", m_poseEstimator.getEstimatedPosition().getRotation().getDegrees(), 0, 0, 0, 0, 0);
-  LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
-  if(Math.abs(m_gyro.getRate()) > 720) // if our angular velocity is greater than 720 degrees per second, ignore vision updates
-  {
-    doRejectUpdate = true;
-  }
-  if(mt2.tagCount == 0)
-  {
-    doRejectUpdate = true;
-  }
-  if(!doRejectUpdate)
-  {
-    m_poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
-    m_poseEstimator.addVisionMeasurement(
-        mt2.pose,
-        mt2.timestampSeconds);
-  }
-}
+//   if(!doRejectUpdate)
+//   {
+//     m_poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.5,.5,9999999));
+//     m_poseEstimator.addVisionMeasurement(
+//         mt1.pose,
+//         mt1.timestampSeconds);
+//   }
+// }
+// else if (useMegaTag2 == true)
+// {
+//   LimelightHelpers.SetRobotOrientation("limelight", m_poseEstimator.getEstimatedPosition().getRotation().getDegrees(), 0, 0, 0, 0, 0);
+//   LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
+//   if(Math.abs(m_gyro.getRate()) > 720) // if our angular velocity is greater than 720 degrees per second, ignore vision updates
+//   {
+//     doRejectUpdate = true;
+//   }
+//   if(mt2.tagCount == 0)
+//   {
+//     doRejectUpdate = true;
+//   }
+//   if(!doRejectUpdate)
+//   {
+//     m_poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
+//     m_poseEstimator.addVisionMeasurement(
+//         mt2.pose,
+//         mt2.timestampSeconds);
+//   }
+// }
 
     return m_odometry.getPoseMeters();
   }
@@ -254,7 +254,7 @@ else if (useMegaTag2 == true)
     // Convert the commanded speeds into the correct units for the drivetrain
     double xSpeedDelivered = xSpeed * DriveConstants.kMaxSpeedMetersPerSecond;
     double ySpeedDelivered = ySpeed * DriveConstants.kMaxSpeedMetersPerSecond;
-    double rotDelivered = rot * -DriveConstants.kMaxAngularSpeed;
+    double rotDelivered = rot * DriveConstants.kMaxAngularSpeed;
 
     var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
         fieldRelative

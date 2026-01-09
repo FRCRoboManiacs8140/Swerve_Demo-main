@@ -7,13 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Example Path Part 1"
+            "pathName": "Spline Path Part 1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Example Path Part 2"
+            "pathName": "Spline Path Part 2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Spline Path Part 3"
           }
         }
       ]

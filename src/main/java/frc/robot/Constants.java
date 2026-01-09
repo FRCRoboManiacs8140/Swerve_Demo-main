@@ -25,8 +25,8 @@ public final class Constants {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
-    public static final double kMaxSpeedMetersPerSecond = 4.2;
-    public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
+    public static final double kMaxSpeedMetersPerSecond = 1; // 4.2;
+    public static final double kMaxAngularSpeed = Math.PI; //2 * Math.PI; // radians per second
 
     // Chassis configuration
     public static final double kTrackWidth = Units.inchesToMeters(26.5);
@@ -40,21 +40,21 @@ public final class Constants {
         new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
 
     // Angular offsets of the modules relative to the chassis in radians
-    public static final double kFrontLeftChassisAngularOffset = 0;
+    public static final double kFrontLeftChassisAngularOffset = Math.PI;
     public static final double kFrontRightChassisAngularOffset = Math.PI;
     public static final double kBackLeftChassisAngularOffset = Math.PI;
-    public static final double kBackRightChassisAngularOffset = Math.PI;
+    public static final double kBackRightChassisAngularOffset = Math.PI/2;
 
     // SPARK MAX CAN IDs
-    public static final int kFrontLeftDrivingCanId = 2;
-    public static final int kRearLeftDrivingCanId = 7;
-    public static final int kFrontRightDrivingCanId = 3;
-    public static final int kRearRightDrivingCanId = 5;
+    public static final int kFrontLeftDrivingCanId = 5;
+    public static final int kRearLeftDrivingCanId = 3;
+    public static final int kFrontRightDrivingCanId = 7;
+    public static final int kRearRightDrivingCanId = 2;
 
-    public static final int kFrontLeftTurningCanId = 1;
-    public static final int kRearLeftTurningCanId = 8;
-    public static final int kFrontRightTurningCanId = 4;
-    public static final int kRearRightTurningCanId = 6;
+    public static final int kFrontLeftTurningCanId = 6;
+    public static final int kRearLeftTurningCanId = 4;
+    public static final int kFrontRightTurningCanId = 8;
+    public static final int kRearRightTurningCanId = 1;
 
     public static final boolean kGyroReversed = false;
   }
@@ -82,14 +82,14 @@ public final class Constants {
   }
 
   public static final class AutoConstants {
-    public static final double kMaxSpeedMetersPerSecond = 1;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 1;
-    public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
-    public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
+    public static final double kMaxSpeedMetersPerSecond = 4.2;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 4.2;
+    public static final double kMaxAngularSpeedRadiansPerSecond = 3*Math.PI;
+    public static final double kMaxAngularSpeedRadiansPerSecondSquared = 3*Math.PI;
 
-    public static final double kPXController = 6;
+    public static final double kPXController = 8; //6;
     public static final double kPYController = 0;
-    public static final double kPThetaController = 2;
+    public static final double kPThetaController = 3; //2;
 
     // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
