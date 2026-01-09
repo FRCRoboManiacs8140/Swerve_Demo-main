@@ -120,7 +120,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new PathPlannerAuto("Spline Test");
+    return new PathPlannerAuto("Zig Zag Auto");
     /* 
     Create config for trajectory
     TrajectoryConfig config = new TrajectoryConfig(
