@@ -17,31 +17,15 @@
     {
       "anchor": {
         "x": 3.0,
-        "y": 6.0
+        "y": 4.0
       },
       "prevControl": {
         "x": 2.6584411310818465,
-        "y": 6.1519812597990455
+        "y": 4.1519812597990455
       },
       "nextControl": {
         "x": 3.2284088577496863,
-        "y": 5.898366375143442
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 4.0,
-        "y": 7.0
-      },
-      "prevControl": {
-        "x": 3.7528402251614685,
-        "y": 7.037577196566089
-      },
-      "nextControl": {
-        "x": 4.270932661634861,
-        "y": 6.958808467562822
+        "y": 3.898366375143442
       },
       "isLocked": false,
       "linkedName": null
@@ -49,15 +33,31 @@
     {
       "anchor": {
         "x": 5.0,
-        "y": 6.0
+        "y": 7.0
       },
       "prevControl": {
-        "x": 5.233840938628518,
-        "y": 6.088421803992759
+        "x": 4.752840225161469,
+        "y": 7.037577196566089
       },
       "nextControl": {
-        "x": 4.411002372479241,
-        "y": 5.7772835112692755
+        "x": 5.270932661634861,
+        "y": 6.958808467562822
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.0,
+        "y": 5.5
+      },
+      "prevControl": {
+        "x": 6.233840938628518,
+        "y": 5.588421803992759
+      },
+      "nextControl": {
+        "x": 5.411002372479241,
+        "y": 5.2772835112692755
       },
       "isLocked": false,
       "linkedName": null
@@ -78,7 +78,18 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "pointTowardsZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 2.0,
+        "y": 2.0
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.10518626734843355,
+      "maxWaypointRelativePos": 3.8626734842951125,
+      "name": "Point Towards Zone"
+    }
+  ],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 6.0,
