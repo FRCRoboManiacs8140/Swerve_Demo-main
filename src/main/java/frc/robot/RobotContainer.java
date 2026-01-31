@@ -30,7 +30,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
 import edu.wpi.first.wpilibj2.command.InstantCommand; 
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.events.EventTrigger;
@@ -87,7 +86,7 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_driverController, Button.kR1.value)
+    new JoystickButton(m_driverController, XboxController.Button.kx.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));  
@@ -106,6 +105,11 @@ public class RobotContainer {
     .onTrue(
       new StrafeCommand(m_robotDrive)
     );
+
+    new JoystickButton(m_driverController, XboxController.Button.kR1.value)
+    .onTure( 
+      new PathfinderCommand(m_robotDrive, "New Path")
+    )
 
     // new JoystickButton(m_driverController, XboxController.Button.kX.value)
     // .onTrue(
