@@ -61,7 +61,6 @@ public final class Constants {
     public static final int kShooterFollowerMotorCanId = 11;
 
     public static final int kAgitatorMotorCanId = 12;
-    
     public static final int kIntakeMotorCanId = 13;
 
     public static final boolean kGyroReversed = false;

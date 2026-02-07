@@ -35,15 +35,14 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 public class AgitatorSubsystem extends SubsystemBase{
-    private final MAXSwerveModule m_agitator = new MAXSwerveModule(
-      DriveConstants.kAgitatorMotorCanId);
+    CANSparkMax agitatorMotor= new CANSparkMax(kAgitatorMotorCanId, MotorType.kBrushless);
 
       //Start of perioidic
       @Override
       public void periodic() {
         public void agitate() {
             //Change later example command
-            m_Agitator.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
+            agitatorMotor.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
         }
       }
 }

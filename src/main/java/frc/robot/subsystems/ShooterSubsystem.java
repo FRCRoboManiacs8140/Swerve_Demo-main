@@ -38,20 +38,18 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 public class ShooterSubsystem extends SubsystemBase{
 
-    private final MAXSwerveModule m_ShooterLeader = new MAXSwerveModule(
-      DriveConstants.kShooterLeaderMotorCanId);
+    CANSparkMax shooterLeaderMotor = new CANSparkMax(kShooterLeaderMotorCanId, MotorType.kBrushless);
 
-      private final MAXSwerveModule m_ShooterFollower = new MAXSwerveModule(
-      DriveConstants.kShooterFollowerMotorCanId);
+    CANSparkMax shooterFollowerMotor = new CANSparkMax(kShooterFollowerMotorCanId, MotorType.kBrushless);
 
 
 @Override
 public void periodic() {
     public void shoot() {
-        m_ShooterLeader.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
-        m_ShooterFollower.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
+        shooterLeaderMotor.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
+        shooterFollowerMotor.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
     }
-}
+} 
 }
 
 

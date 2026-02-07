@@ -37,14 +37,13 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 
 public class IntakeSubstystem extends SubsystemBase{
-    private final MAXSwerveModule m_Intake = new MAXSwerveModule(
-      DriveConstants.kIntakeMotorCanId);
+    CANSparkMax intakeMotor = new CANSparkMax(kIntakeMotorCanId, MotorType.kBrushless);
 
     @Override
     public void periodic() {
         public void intake() {
             //Change later example command
-            m_Intake.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
+            intakeMotor.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
         }
     }
 }
