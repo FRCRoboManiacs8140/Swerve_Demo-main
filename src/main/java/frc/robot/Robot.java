@@ -31,7 +31,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     // Set the pathfinder with Advantage Kit Compatability
-    Pathfinding.setPathfinder(new LocalADStarAK());
+    //Pathfinding.setPathfinder(new LocalADStarAK());
 
     
   }
