@@ -1,4 +1,3 @@
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.hal.FRCNetComm.tInstances;
@@ -38,18 +37,17 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 public class ShooterSubsystem extends SubsystemBase{
 
-    CANSparkMax shooterLeaderMotor = new CANSparkMax(kShooterLeaderMotorCanId, MotorType.kBrushless);
+    CANSparkMax shooterLeaderLeftMotor = new CANSparkMax(kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
 
-    CANSparkMax shooterFollowerMotor = new CANSparkMax(kShooterFollowerMotorCanId, MotorType.kBrushless);
+    CANSparkMax shooterFollowerRightMotor = new CANSparkMax(kShooterFollowerRightMotorCanId, MotorType.kBrushless);
 
 
 @Override
-private void periodic() {
-    public void brokenShootCommand() {
-        shooterLeaderMotor.set(0.5);
-        shooterFollowerMotor.set(0.5);
+    private brokenShootCommand() {
+        shooterLeaderLeftMotor.set(0.5);
+        shooterFollowerRightMotor.set(0.5);
     }
-} 
+    
 }
 
 

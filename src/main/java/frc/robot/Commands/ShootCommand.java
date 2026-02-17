@@ -8,8 +8,6 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShootCommand {
-
 public class ShootCommand extends Command {
     
   // Instantiate Stuff
@@ -40,4 +38,3 @@ public boolean isFinished() {
 }
 }
 
-}

@@ -39,13 +39,6 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 public class IntakeSubstystem extends SubsystemBase{
     CANSparkMax intakeMotor = new CANSparkMax(kIntakeMotorCanId, MotorType.kBrushless);
 
-    @Override
-    // private void periodic() {
-        private void intake() {
-            //Change later example command
-            intakeMotor.set(0.5);
-        }
-    // }
 }
 
 

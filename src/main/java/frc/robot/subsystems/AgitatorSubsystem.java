@@ -36,13 +36,4 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 public class AgitatorSubsystem extends SubsystemBase{
     CANSparkMax agitatorMotor= new CANSparkMax(kAgitatorMotorCanId, MotorType.kBrushless);
-
-      //Start of perioidic
-      @Override
-      // private void periodic() {
-        private void agitate() {
-            //Change later example command
-            agitatorMotor.set(0.5);
-        }
-      //}
 }

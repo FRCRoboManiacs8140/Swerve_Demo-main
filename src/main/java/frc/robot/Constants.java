@@ -47,6 +47,7 @@ public final class Constants {
 
     // Speed of the shooter
     public static final double kShooterSpeed = 0.5;
+    public static final double kIntakeSpeed = 0.5;
 
     // SPARK MAX CAN IDs
     public static final int kFrontLeftDrivingCanId = 5;
@@ -60,8 +61,8 @@ public final class Constants {
     public static final int kRearRightTurningCanId = 1;
 
     public static final int kIndexerMotorCanId = 9;
-    public static final int kShooterLeaderMotorCanId = 10;
-    public static final int kShooterFollowerMotorCanId = 11;
+    public static final int kShooterLeaderLeftMotorCanId = 10;
+    public static final int kShooterFollowerRightMotorCanId = 11;
 
     public static final int kAgitatorMotorCanId = 12;
     public static final int kIntakeMotorCanId = 13;
