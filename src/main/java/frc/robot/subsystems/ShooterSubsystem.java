@@ -44,10 +44,10 @@ public class ShooterSubsystem extends SubsystemBase{
 
 
 @Override
-public void periodic() {
-    public void shoot() {
-        shooterLeaderMotor.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
-        shooterFollowerMotor.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
+private void periodic() {
+    public void brokenShootCommand() {
+        shooterLeaderMotor.set(0.5);
+        shooterFollowerMotor.set(0.5);
     }
 } 
 }

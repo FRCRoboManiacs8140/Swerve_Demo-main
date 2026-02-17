@@ -45,6 +45,9 @@ public final class Constants {
     public static final double kBackLeftChassisAngularOffset = Math.PI;
     public static final double kBackRightChassisAngularOffset = 0;
 
+    // Speed of the shooter
+    public static final double kShooterSpeed = 0.5;
+
     // SPARK MAX CAN IDs
     public static final int kFrontLeftDrivingCanId = 5;
     public static final int kRearLeftDrivingCanId = 3;

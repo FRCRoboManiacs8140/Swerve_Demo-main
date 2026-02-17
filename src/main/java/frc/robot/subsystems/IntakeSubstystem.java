@@ -40,12 +40,12 @@ public class IntakeSubstystem extends SubsystemBase{
     CANSparkMax intakeMotor = new CANSparkMax(kIntakeMotorCanId, MotorType.kBrushless);
 
     @Override
-    public void periodic() {
-        public void intake() {
+    // private void periodic() {
+        private void intake() {
             //Change later example command
-            intakeMotor.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
+            intakeMotor.set(0.5);
         }
-    }
+    // }
 }
 
 

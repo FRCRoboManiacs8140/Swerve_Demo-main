@@ -39,10 +39,10 @@ public class AgitatorSubsystem extends SubsystemBase{
 
       //Start of perioidic
       @Override
-      public void periodic() {
-        public void agitate() {
+      // private void periodic() {
+        private void agitate() {
             //Change later example command
-            agitatorMotor.setDesiredState(new SwerveModuleState(0.5, new Rotation2d(0)));
+            agitatorMotor.set(0.5);
         }
-      }
+      //}
 }
