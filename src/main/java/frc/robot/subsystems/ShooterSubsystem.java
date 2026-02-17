@@ -53,6 +53,7 @@ public class ShooterSubsystem extends SubsystemBase {
       DriveConstants.kShooterFollowerRightMotorCanId,
       DriveConstants.kShooterLeaderLeftMotorCanId);
 
+<<<<<<< HEAD
     public SparkMax m_shooterFollowerRightMotor; 
     public SparkMax m_shooterLeaderLeftMotor; 
 
@@ -96,4 +97,17 @@ public class ShooterSubsystem extends SubsystemBase {
     //     m_shooter.set(kShooterSpeed);
     //   }
 >>>>>>> 7700cc8 (Build Succeeds, successfully implemented ShootCommand ShooterSubsystem and MAXSwerveSHooterModule)
+=======
+    CANSparkMax shooterLeaderLeftMotor = new CANSparkMax(kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
+
+    CANSparkMax shooterFollowerRightMotor = new CANSparkMax(kShooterFollowerRightMotorCanId, MotorType.kBrushless);
+
+
+@Override
+    private brokenShootCommand() {
+        shooterLeaderLeftMotor.set(0.5);
+        shooterFollowerRightMotor.set(0.5);
+    }
+    
+>>>>>>> 16f5770 (Saving Before making risky changes)
 }

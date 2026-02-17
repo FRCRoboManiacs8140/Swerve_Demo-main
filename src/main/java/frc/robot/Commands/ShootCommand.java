@@ -7,6 +7,7 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 
+<<<<<<< HEAD
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
@@ -16,6 +17,8 @@ import com.revrobotics.spark.SparkBase;
 
 
 
+=======
+>>>>>>> 16f5770 (Saving Before making risky changes)
 public class ShootCommand extends Command {
     
   // Instantiate Stuff
@@ -69,3 +72,7 @@ public boolean isFinished() {
     // }
 }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 16f5770 (Saving Before making risky changes)

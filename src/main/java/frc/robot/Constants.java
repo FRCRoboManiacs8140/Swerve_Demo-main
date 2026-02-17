@@ -71,10 +71,17 @@ public final class Constants {
     public static final int kFrontRightTurningCanId = 8;
     public static final int kRearRightTurningCanId = 1;
 
+<<<<<<< HEAD
     // SPARK MAX CAN IDs for other subsystems
     public static final int kIntakeMotorCanId = 9;
     public static final int kShooterLeaderLeftMotorCanId = 10;
     public static final int kShooterFollowerRightMotorCanId = 11;
+=======
+    public static final int kIndexerMotorCanId = 9;
+    public static final int kShooterLeaderLeftMotorCanId = 10;
+    public static final int kShooterFollowerRightMotorCanId = 11;
+
+>>>>>>> 16f5770 (Saving Before making risky changes)
     public static final int kAgitatorMotorCanId = 12;
     public static final int kIndexMotorCanId = 13; 
     

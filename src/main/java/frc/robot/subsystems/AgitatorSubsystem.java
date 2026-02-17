@@ -12,6 +12,7 @@ import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
+<<<<<<< HEAD
 
 public class AgitatorSubsystem extends SubsystemBase {
     // Define the leader and follower motors
@@ -37,4 +38,8 @@ public class AgitatorSubsystem extends SubsystemBase {
     public void stop() {
         m_agitatorMotor.stopMotor();
     }
+=======
+public class AgitatorSubsystem extends SubsystemBase{
+    CANSparkMax agitatorMotor= new CANSparkMax(kAgitatorMotorCanId, MotorType.kBrushless);
+>>>>>>> 16f5770 (Saving Before making risky changes)
 }
