@@ -30,8 +30,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    // Set the pathfinder with Advantage Kit Compatability
-    Pathfinding.setPathfinder(new LocalADStarAK());
+    // // Set the pathfinder with Advantage Kit Compatability
+    // Pathfinding.setPathfinder(new LocalADStarAK());
 
     
   }

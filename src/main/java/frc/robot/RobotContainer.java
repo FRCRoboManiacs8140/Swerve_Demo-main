@@ -86,7 +86,7 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_driverController, XboxController.Button.kx.value)
+    new JoystickButton(m_driverController, XboxController.Button.kX.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));  
@@ -106,10 +106,11 @@ public class RobotContainer {
       new StrafeCommand(m_robotDrive)
     );
 
-    new JoystickButton(m_driverController, XboxController.Button.kR1.value)
-    .onTure( 
-      new PathfinderCommand(m_robotDrive, "New Path")
-    )
+    // PathPlanner button binding. DON'T USE THIS
+    // new JoystickButton(m_driverController, XboxController.Button.kR1.value)
+    // .onTure( 
+    //   new PathfinderCommand(m_robotDrive, "New Path")
+    // );
 
     // new JoystickButton(m_driverController, XboxController.Button.kX.value)
     // .onTrue(
