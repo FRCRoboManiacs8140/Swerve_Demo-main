@@ -45,7 +45,7 @@ public final class Constants {
     public static final double kBackLeftChassisAngularOffset = Math.PI;
     public static final double kBackRightChassisAngularOffset = Math.PI/2;
 
-    // SPARK MAX CAN IDs
+    // SPARK MAX CAN IDs for Drive Motors
     public static final int kFrontLeftDrivingCanId = 5;
     public static final int kRearLeftDrivingCanId = 3;
     public static final int kFrontRightDrivingCanId = 7;
@@ -55,6 +55,12 @@ public final class Constants {
     public static final int kRearLeftTurningCanId = 4;
     public static final int kFrontRightTurningCanId = 8;
     public static final int kRearRightTurningCanId = 1;
+
+    // SPARK MAX CAN IDs for other subsystems
+    public static final int kIntakeMotorCanId = 9;
+    public static final int kShooterLeaderLeftMotorCanId = 10;
+    public static final int kShooterFollowerRightMotorCanId = 11;
+    public static final int kAgitatorMotorCanId = 12;
 
     public static final boolean kGyroReversed = false;
   }
