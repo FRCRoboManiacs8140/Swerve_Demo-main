@@ -18,7 +18,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase;
 
-public class IntakeAgitatorSubsystem extends SubsystemBase {
-    private final SparkMax m_intakeMotor = new SparkMax(DriveConstants.kIntakeMotorCanId, MotorType.kBrushless);
-    private final SparkMax m_agitatorMotor = new SparkMax(DriveConstants.kAgitatorMotorCanId, MotorType.kBrushless);
+public class ShooterSubsystem extends SubsystemBase {
+    public final SparkMax m_shooterFollowerRightMotor = new SparkMax(DriveConstants.kShooterFollowerRightMotorCanId, MotorType.kBrushless);
+    public final SparkMax m_shooterLeaderLeftMotor = new SparkMax(DriveConstants.kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
     }
