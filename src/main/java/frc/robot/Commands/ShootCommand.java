@@ -19,8 +19,9 @@ import com.revrobotics.spark.SparkBase;
 public class ShootCommand extends Command {
     
   // Instantiate Stuff
-  ShooterSubsystem m_shooterFollowerRightMotor;
-  ShooterSubsystem m_shooterLeaderLeftMotor; 
+  SparkMax m_shooterFollowerRightMotor = new SparkMax(3, MotorType.kBrushless);
+  SparkMax m_shooterLeaderLeftMotor = new SparkMax(3, MotorType.kBrushless); 
+  
   
 
 // public ShootCommand(ShooterSubsystem m_shooterFollowerRightMotor, double kShooterSpeed) {
@@ -33,6 +34,7 @@ public class ShootCommand extends Command {
 
 @Override
 public void initialize() {
+
     
 }
 
@@ -53,5 +55,6 @@ public void end(boolean interrupted) {
 public boolean isFinished() {
     m_shooterFollowerRightMotor.set(0); 
     m_shooterLeaderLeftMotor.set(0);
+    return true;
 }
 }
