@@ -23,6 +23,7 @@ import frc.robot.Commands.StrafeCommand;
 import frc.robot.Commands.Drive20Feet;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -60,6 +61,12 @@ public class RobotContainer {
     return m_robotShoot;
   }
 
+  private final IntakeSubsystem m_robotIntate = new IntakeSubsystem();
+
+  public IntakeSubsystem getRobotIntake(){ 
+    return m_robotIntate;
+  }
+
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
 
@@ -82,7 +89,7 @@ public class RobotContainer {
                 true),
             m_robotDrive));
 
-            
+
     m_robotShoot.setDefaultCommand(
       new RunCommand(
         () -> m_robotShoot.shoot(0.5),
