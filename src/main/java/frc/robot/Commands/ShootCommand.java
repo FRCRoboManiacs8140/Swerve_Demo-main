@@ -19,18 +19,22 @@ import com.revrobotics.spark.SparkBase;
 public class ShootCommand extends Command {
     
   // Instantiate Stuff
-  SparkMax m_shooterFollowerRightMotor = new SparkMax(3, MotorType.kBrushless);
-  SparkMax m_shooterLeaderLeftMotor = new SparkMax(3, MotorType.kBrushless); 
+  public ShooterSubsystem m_robotShoot;
+    // double m_distance;
+    // double m_initialDistance;
+//   SparkMax m_shooterFollowerRightMotor = new SparkMax(D, MotorType.kBrushless);
+//   SparkMax m_shooterLeaderLeftMotor = new SparkMax(3, MotorType.kBrushless); 
   
   
 
-// public ShootCommand(ShooterSubsystem m_shooterFollowerRightMotor, double kShooterSpeed) {
-//     m_shooterFollowerRightMotor = shooterFollowerRightMotor; 
-//     m_shooterLeaderLeftMotor = shooterLeaderLeftMotor;
-//     // m_robotDrive = robotDrive;
-//     // m_distance = distance;
-//     // addRequirements(m_robotDrive);
-// }
+public ShootCommand(ShooterSubsystem robotShoot) {
+    m_robotShoot = robotShoot;
+    // m_shooterFollowerRightMotor = m_shooterFollowerRightMotor; 
+    // m_shooterLeaderLeftMotor = m_shooterLeaderLeftMotor;
+    // m_robotDrive = robotDrive;
+    // m_distance = distance;
+    // addRequirements(m_robotDrive);
+}
 
 @Override
 public void initialize() {
@@ -41,20 +45,21 @@ public void initialize() {
 
 @Override
 public void execute() {
-    m_shooterFollowerRightMotor.set(DriveConstants.kShooterSpeed); 
-    m_shooterLeaderLeftMotor.set(DriveConstants.kShooterSpeed);
+    // m_robotShoot.set(DriveConstants.kShooterSpeed); ???
+    // m_shooterFollowerRightMotor.set(DriveConstants.kShooterSpeed); 
+    // m_shooterLeaderLeftMotor.set(DriveConstants.kShooterSpeed);
 }
 
 @Override
 public void end(boolean interrupted) {
-    m_shooterFollowerRightMotor.set(0); 
-    m_shooterLeaderLeftMotor.set(0);
+    // m_shooterFollowerRightMotor.set(0); 
+    // m_shooterLeaderLeftMotor.set(0);
 }
 
 @Override
 public boolean isFinished() {
-    m_shooterFollowerRightMotor.set(0); 
-    m_shooterLeaderLeftMotor.set(0);
+    // m_shooterFollowerRightMotor.set(0); 
+    // m_shooterLeaderLeftMotor.set(0);
     return true;
 }
 }
