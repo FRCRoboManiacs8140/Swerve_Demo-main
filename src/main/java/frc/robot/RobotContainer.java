@@ -30,9 +30,12 @@ import frc.robot.Commands.Drive20Feet;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+<<<<<<< HEAD
 import frc.robot.subsystems.AgitatorSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.ActuatorSubsystem;
+=======
+>>>>>>> 6658100 (Implimented intake subsystem)
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -71,6 +74,7 @@ public class RobotContainer {
     return m_robotShoot;
   }
 
+<<<<<<< HEAD
   private final IntakeSubsystem m_robotIntake = new IntakeSubsystem();
 
   public IntakeSubsystem getRobotIntake(){ 
@@ -93,6 +97,12 @@ public class RobotContainer {
 
   public ActuatorSubsystem getRobotActuate(){ 
     return m_robotActuate;
+=======
+  private final IntakeSubsystem m_robotIntate = new IntakeSubsystem();
+
+  public IntakeSubsystem getRobotIntake(){ 
+    return m_robotIntate;
+>>>>>>> 6658100 (Implimented intake subsystem)
   }
 
   // The driver's controller
