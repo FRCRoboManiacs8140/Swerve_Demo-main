@@ -49,7 +49,18 @@ public final class Constants {
     public static final double kShooterSpeed = 0.5;
     public static final double kIntakeSpeed = 0.5;
 
-    // SPARK MAX CAN IDs
+    // Shooter Speed 
+    public static final double kShooterSpeed = 0.1 ;
+    public static final double kAgitatorSpeed = 0.5;
+    public static final double kIntakeSpeed = 0.5;
+    public static final double kIndexSpeed = 0.5;
+    public static final double kActuatorSpeed = 0.1;
+
+    // Actuator Positions
+    public static final double kActuatorExtendedPosition = 1.0; // Adjust as needed
+    public static final double kActuatorRetractedPosition = 0.0; // Adjust as needed
+
+    // SPARK MAX CAN IDs for Drive Motors
     public static final int kFrontLeftDrivingCanId = 5;
     public static final int kRearLeftDrivingCanId = 3;
     public static final int kFrontRightDrivingCanId = 7;
@@ -60,12 +71,15 @@ public final class Constants {
     public static final int kFrontRightTurningCanId = 8;
     public static final int kRearRightTurningCanId = 1;
 
-    public static final int kIndexerMotorCanId = 9;
+    // SPARK MAX CAN IDs for other subsystems
+    public static final int kIntakeMotorCanId = 9;
     public static final int kShooterLeaderLeftMotorCanId = 10;
     public static final int kShooterFollowerRightMotorCanId = 11;
-
     public static final int kAgitatorMotorCanId = 12;
-    public static final int kIntakeMotorCanId = 13;
+    public static final int kIndexMotorCanId = 13; 
+    
+    public static final int kActuatorLeaderMotorCanId = 14;
+    public static final int kActuatorFollowerMotorCanId = 15;
 
     public static final boolean kGyroReversed = false;
   }

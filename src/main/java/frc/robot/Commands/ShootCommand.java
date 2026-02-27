@@ -5,36 +5,51 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.AutoConstants;
-import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.spark.SparkBase;
+
+
 
 public class ShootCommand extends Command {
     
   // Instantiate Stuff
-  ShooterSubsystem m_shooterSubsystem;
-    double shooterSpeed = kShooterSpeed;
+  public ShooterSubsystem m_robotShoot;
+  public SparkMax m_shooterLeaderLeftMotor;
+  public SparkMax m_shooterFollowerRightMotor;
+    // double m_initialDistance = m_robotShoot.getPose();
+    // double m_distance = 180; // Target distance
     
-public ShootCommand(ShooterSubsystem shooterSubsystem) {
-    m_shooterSubsystem = shooterSubsystem;
-    addRequirements(m_shooterSubsystem);
+// Make the shoot command
+public ShootCommand(ShooterSubsystem robotShoot) {
+    m_robotShoot = robotShoot;
 }
 
+// Run the shoot command
 @Override
 public void execute() {
-    shooterFollowerMotor.set(shooterSpeed);
-    shooterLeaderMotor.set(shooterSpeed);
+    // This uses the speed set in Constants
+    m_robotShoot.shoot(DriveConstants.kShooterSpeed);
 }
 
+// If command is interrupted or ends, stop the shooter
 @Override
 public void end(boolean interrupted) {
-    shooterLeadermotor.set(0);
-    shooterFollowerMotor.set(0);
+    m_robotShoot.stop();
 }
 
 @Override
 public boolean isFinished() {
-    shooterLeadermotor.set(0);
-    shooterFollowerMotor.set(0);
+    return true;
+    // if (m_robotShoot.getPose() - m_initialDistance >= m_distance) {
+    //     return true;
+    // } else {
+    //     return false;
+    // }
 }
 }
-

@@ -20,8 +20,19 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Commands.AimCommand;
 import frc.robot.Commands.StrafeCommand;
+import frc.robot.Commands.ShootCommand;
+import frc.robot.Commands.IntakeCommand;
+import frc.robot.Commands.AgitateCommand;
+import frc.robot.Commands.IndexCommand;
+import frc.robot.Commands.DeployActuatorCommand;
+import frc.robot.Commands.RetractActuatorCommand;
 import frc.robot.Commands.Drive20Feet;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.AgitatorSubsystem;
+import frc.robot.subsystems.IndexSubsystem;
+import frc.robot.subsystems.ActuatorSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -37,6 +48,7 @@ import com.pathplanner.lib.path.GoalEndState;
 import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.Waypoint;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -51,6 +63,36 @@ public class RobotContainer {
   public DriveSubsystem getRobotDrive(){
     return m_robotDrive;
 
+  }
+
+  private final ShooterSubsystem m_robotShoot = new ShooterSubsystem();
+
+  public ShooterSubsystem getRobotShooter(){ 
+    return m_robotShoot;
+  }
+
+  private final IntakeSubsystem m_robotIntake = new IntakeSubsystem();
+
+  public IntakeSubsystem getRobotIntake(){ 
+    return m_robotIntake;
+  }
+
+  private final AgitatorSubsystem m_robotAgitate = new AgitatorSubsystem();
+   
+  public AgitatorSubsystem getRobotAgitate(){ 
+    return m_robotAgitate;
+  }
+
+  private final IndexSubsystem m_robotIndex = new IndexSubsystem();
+
+  public IndexSubsystem getRobotIndex(){ 
+    return m_robotIndex;
+  }
+  
+  private final ActuatorSubsystem m_robotActuate = new ActuatorSubsystem();
+
+  public ActuatorSubsystem getRobotActuate(){ 
+    return m_robotActuate;
   }
 
   // The driver's controller
@@ -74,6 +116,28 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
                 true),
             m_robotDrive));
+
+
+    m_robotShoot.setDefaultCommand(
+      new RunCommand(
+        () -> m_robotShoot.shoot(0.5),
+        m_robotShoot));
+
+    m_robotAgitate.setDefaultCommand(
+      new RunCommand(
+        () -> m_robotAgitate.agitate(0.5),
+        m_robotAgitate));
+
+    m_robotIndex.setDefaultCommand(
+      new RunCommand(
+        () -> m_robotIndex.index(0.5),
+        m_robotIndex));
+
+    m_robotActuate.setDefaultCommand(
+      new RunCommand(
+        () -> m_robotActuate.deploy(0.5),
+        m_robotActuate));
+
   }
 
   /**
@@ -86,35 +150,60 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
+    // Map the setX command to the X button
     new JoystickButton(m_driverController, XboxController.Button.kX.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));  
-            
+     
+    // Map the zeroHeading command to the A button        
     new JoystickButton(m_driverController, XboxController.Button.kA.value)
         .whileTrue(new RunCommand(
              () -> m_robotDrive.zeroHeading(),
             m_robotDrive));
-  
+    
+    // Map the AimCommand to the B button
     new JoystickButton(m_driverController, XboxController.Button.kB.value)
     .onTrue(
       new AimCommand(m_robotDrive)
     );
 
-    new JoystickButton(m_driverController, XboxController.Button.kY.value)
+    // Map the ShootCommand to the right trigger button
+    new JoystickButton(m_driverController, XboxController.Axis.kRightTrigger.value)
     .onTrue(
-      new StrafeCommand(m_robotDrive)
+      new ShootCommand(m_robotShoot)
     );
 
-    // new JoystickButton(m_driverController, XboxController.Button.kR1.value)
-    // .onTure( 
-    //   new PathfinderCommand(m_robotDrive, "New Path")
-    // );
+    // Map the IntakeCommand to the right bumper button
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
+    .onTrue(
+      new IntakeCommand(m_robotIntake)
+    );
 
-    // new JoystickButton(m_driverController, XboxController.Button.kX.value)
-    // .onTrue(
-    //   new Drive20Feet(m_robotDrive, 2)
-    // );
+    // Map the AgitateCommand to the left bumper button
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
+    .onTrue(
+      new AgitateCommand(m_robotAgitate)
+    );
+
+    // Map the IndexCommand to the left trigger button
+    new JoystickButton(m_driverController, XboxController.Axis.kLeftTrigger.value)
+    .onTrue(
+      new IndexCommand(m_robotIndex)
+    );
+
+    // Map the DeployActuatorCommand to the D-pad up button
+    new POVButton(m_driverController, 0) // 0 degrees for D-pad up
+    .onTrue(
+      new DeployActuatorCommand(m_robotActuate, DriveConstants.kActuatorExtendedPosition)
+    );
+
+    // Map the RetractActuatorCommand to the D-pad down button
+    new POVButton(m_driverController, 180) // 180 degrees for D-pad down
+    .onTrue(
+      new RetractActuatorCommand(m_robotActuate, DriveConstants.kActuatorRetractedPosition)
+    );
+  
   }
 
 
@@ -125,52 +214,5 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return new PathPlannerAuto("Zig Zag Auto");
-    /* 
-    Create config for trajectory
-    TrajectoryConfig config = new TrajectoryConfig(
-        AutoConstants.kMaxSpeedMetersPerSecond,
-        AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-        Add kinematics to ensure max speed is actually obeyed
-        .setKinematics(DriveConstants.kDriveKinematics);
-
-    An example trajectory to follow. All units in meters.
-    Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-        Start at the origin facing the +X direction
-        new Pose2d(0, 0, new Rotation2d(0)),
-        Pass through these two interior waypoints, making an 's' curve path
-        List.of(new Translation2d(2, 0)),
-        new Pose2d(8, 0, new Rotation2d().fromDegrees(0)),
-        config);
-        */
-
-    // var thetaController = new ProfiledPIDController(
-    //     AutoConstants.kPThetaController, 0.2, 0, AutoConstants.kThetaControllerConstraints);
-    // thetaController.enableContinuousInput(-Math.PI, Math.PI);
-
-    // SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
-    //     exampleTrajectory,
-    //     m_robotDrive::getPose, // Functional interface to feed supplier
-    //     DriveConstants.kDriveKinematics,
-
-    //     // Position controllers
-    //     new PIDController(AutoConstants.kPXController, 0, 0),
-    //     new PIDController(AutoConstants.kPYController, 0, 0),
-    //     thetaController,
-    //     m_robotDrive::setModuleStates,
-    //     m_robotDrive);
-
-    // Reset odometry to the starting pose of the trajectory.
-    // m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
-    /* 
-    return Commands.sequence(
-    new InstantCommand(() -> m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose())),
-    swerveControllerCommand);
-    
-    return InstantCommand(()->m_robotDrive.drive(0,0,0,false));
-    *
-    
-    // Run path following command, then stop at the end.
-    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0,0,0, false));
-    */
   }
 }

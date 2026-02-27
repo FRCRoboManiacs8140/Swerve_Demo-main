@@ -13,28 +13,28 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 
-public class AgitatorSubsystem extends SubsystemBase {
+public class IndexSubsystem extends SubsystemBase {
     // Define the leader and follower motors
-    private final MAXConfigure m_agitator = new MAXConfigure(
-      DriveConstants.kAgitatorMotorCanId);
+    private final MAXConfigure m_index = new MAXConfigure(
+      DriveConstants.kIndexMotorCanId);
 
-    public SparkMax m_agitatorMotor; 
+    public SparkMax m_indexMotor; 
 
-    public AgitatorSubsystem() {
+    public IndexSubsystem() {
         // Initialize the motors
-        m_agitatorMotor = new SparkMax(DriveConstants.kAgitatorMotorCanId, MotorType.kBrushless);
+        m_indexMotor = new SparkMax(DriveConstants.kIndexMotorCanId, MotorType.kBrushless);
 
         // Invert Motor if needed
-        // m_agitatorMotor.setInverted(true); 
+        // m_indexMotor.setInverted(true); 
     }
 
     // Method to set the speed of both motors
-    public void agitate(double speed) {
-        m_agitatorMotor.set(speed);
+    public void index(double speed) {
+        m_indexMotor.set(speed);
     }
 
     // Method to stop both motors
     public void stop() {
-        m_agitatorMotor.stopMotor();
+        m_indexMotor.stopMotor();
     }
 }
