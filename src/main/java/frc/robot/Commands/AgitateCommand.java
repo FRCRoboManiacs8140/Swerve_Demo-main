@@ -5,10 +5,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.AutoConstants;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.AgitatorSubsystem;
-
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
@@ -23,23 +20,18 @@ public class AgitateCommand extends Command {
   // Instantiate Stuff
 public AgitatorSubsystem m_robotAgitate;
     
-
+// Make the Agitate Command
 public AgitateCommand(AgitatorSubsystem robotAgitate) {
     m_robotAgitate = robotAgitate;
 }
 
-@Override
-public void initialize() {
-
-    
-}
-
-
+// Run the Agitate Command
 @Override
 public void execute() {
     m_robotAgitate.agitate(DriveConstants.kAgitatorSpeed);
 }
 
+// If command is interrupted or ends, stop the agitator
 @Override
 public void end(boolean interrupted) {
     m_robotAgitate.stop();

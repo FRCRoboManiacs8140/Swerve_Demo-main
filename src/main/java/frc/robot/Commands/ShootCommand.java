@@ -21,23 +21,19 @@ public class ShootCommand extends Command {
   // Instantiate Stuff
   public ShooterSubsystem m_robotShoot;
     
-
+// Make the shoot command
 public ShootCommand(ShooterSubsystem robotShoot) {
     m_robotShoot = robotShoot;
 }
 
-@Override
-public void initialize() {
-
-    
-}
-
-
+// Run the shoot command
 @Override
 public void execute() {
+    // This uses the speed set in Constants
     m_robotShoot.shoot(DriveConstants.kShooterSpeed);
 }
 
+// If command is interrupted or ends, stop the shooter
 @Override
 public void end(boolean interrupted) {
     m_robotShoot.stop();
