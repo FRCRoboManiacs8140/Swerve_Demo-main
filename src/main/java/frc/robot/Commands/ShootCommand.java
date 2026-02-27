@@ -40,12 +40,12 @@ public void execute() {
 
 @Override
 public void end(boolean interrupted) {
-    m_robotShoot.shoot(0);
+    m_robotShoot.stop();
 }
 
 @Override
 public boolean isFinished() {
-    m_robotShoot.shoot(0);
+    m_robotShoot.stop();
     return true;
 }
 }

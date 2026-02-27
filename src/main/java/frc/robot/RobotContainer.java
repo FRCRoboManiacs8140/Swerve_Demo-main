@@ -22,11 +22,12 @@ import frc.robot.Commands.AimCommand;
 import frc.robot.Commands.StrafeCommand;
 import frc.robot.Commands.ShootCommand;
 import frc.robot.Commands.IntakeCommand;
-// import frc.robot.Commands.AgitatorCommand;
+import frc.robot.Commands.AgitateCommand;
 import frc.robot.Commands.Drive20Feet;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.AgitatorSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -70,11 +71,11 @@ public class RobotContainer {
     return m_robotIntate;
   }
 
-  // private final AgitatorSubsystem m_robotAgitate = new AgitatorSubsystem();
+  private final AgitatorSubsystem m_robotAgitate = new AgitatorSubsystem();
    
-  // public AgitatorSubsystem getRobotAgitate(){ 
-  //   return m_robotAgitate;
-  // }
+  public AgitatorSubsystem getRobotAgitate(){ 
+    return m_robotAgitate;
+  }
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -104,10 +105,10 @@ public class RobotContainer {
         () -> m_robotShoot.shoot(0.5),
         m_robotShoot));
 
-  // m_robotAgitate.setDefaultCommand(
-  //   new RunCommand(
-  //     () -> m_robotAgitate.agitate(0.5),
-  //     m_robotAgitate));
+    m_robotAgitate.setDefaultCommand(
+      new RunCommand(
+        () -> m_robotAgitate.agitate(0.5),
+        m_robotAgitate));
 
   }
 

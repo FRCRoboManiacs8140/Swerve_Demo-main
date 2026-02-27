@@ -7,6 +7,7 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.AgitatorSubsystem;
 
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
@@ -17,14 +18,14 @@ import com.revrobotics.spark.SparkBase;
 
 
 
-public class IntakeCommand extends Command {
+public class AgitateCommand extends Command {
     
   // Instantiate Stuff
-  public IntakeSubsystem m_robotIntake;
+public AgitatorSubsystem m_robotAgitate;
     
 
-public IntakeCommand(IntakeSubsystem robotIntake) {
-    m_robotIntake = robotIntake;
+public AgitateCommand(AgitatorSubsystem robotAgitate) {
+    m_robotAgitate = robotAgitate;
 }
 
 @Override
@@ -36,17 +37,17 @@ public void initialize() {
 
 @Override
 public void execute() {
-    m_robotIntake.intake(DriveConstants.kShooterSpeed);
+    m_robotAgitate.agitate(DriveConstants.kAgitatorSpeed);
 }
 
 @Override
 public void end(boolean interrupted) {
-    m_robotIntake.stop();
+    m_robotAgitate.stop();
 }
 
 @Override
 public boolean isFinished() {
-    m_robotIntake.stop();
+    m_robotAgitate.stop();
     return true;
 }
 }
