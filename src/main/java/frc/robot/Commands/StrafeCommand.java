@@ -19,7 +19,6 @@ public class StrafeCommand extends Command {
   // PID Stuff!
   PIDController m_StrafeController = new PIDController(VisionConstants.p_rotate_to_tag, VisionConstants.i_rotate_to_tag, VisionConstants.d_rotate_to_tag);
   
-
   // Boolean for checking for "Tag In View" 
   boolean tag_in_view;
 
