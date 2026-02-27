@@ -20,6 +20,9 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Commands.AimCommand;
 import frc.robot.Commands.StrafeCommand;
+import frc.robot.Commands.ShootCommand;
+import frc.robot.Commands.IntakeCommand;
+// import frc.robot.Commands.AgitatorCommand;
 import frc.robot.Commands.Drive20Feet;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -67,6 +70,12 @@ public class RobotContainer {
     return m_robotIntate;
   }
 
+  // private final AgitatorSubsystem m_robotAgitate = new AgitatorSubsystem();
+   
+  // public AgitatorSubsystem getRobotAgitate(){ 
+  //   return m_robotAgitate;
+  // }
+
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
 
@@ -94,6 +103,12 @@ public class RobotContainer {
       new RunCommand(
         () -> m_robotShoot.shoot(0.5),
         m_robotShoot));
+
+  // m_robotAgitate.setDefaultCommand(
+  //   new RunCommand(
+  //     () -> m_robotAgitate.agitate(0.5),
+  //     m_robotAgitate));
+
   }
 
   /**
@@ -121,9 +136,19 @@ public class RobotContainer {
       new AimCommand(m_robotDrive)
     );
 
-    new JoystickButton(m_driverController, XboxController.Button.kY.value)
+    // new JoystickButton(m_driverController, XboxController.Button.kY.value)
+    // .onTrue(
+    //   new StrafeCommand(m_robotDrive)
+    // );
+
+    new JoystickButton(m_driverController, XboxController.Axis.kRightTrigger.value)
     .onTrue(
-      new StrafeCommand(m_robotDrive)
+      new ShootCommand(m_robotShoot)
+    );
+
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
+    .onTrue(
+      new IntakeCommand(m_robotIntate)
     );
 
     // PathPlanner button binding. DON'T USE THIS
