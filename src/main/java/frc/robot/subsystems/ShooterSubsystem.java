@@ -65,13 +65,13 @@ public class ShooterSubsystem extends SubsystemBase {
         m_shooterFollowerMotor = new SparkMax(DriveConstants.kShooterFollowerRightMotorCanId, MotorType.kBrushless);
         m_shooterLeaderMotor = new SparkMax(DriveConstants.kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
 
-        // Optionally, invert one motor if needed
-        // m_shooterFollowerMotor.setInverted(true); // Example: invert the follower motor
+        // Invert motors if needed
+        // m_shooterFollowerMotor.setInverted(true); 
+        // m_shooterFollowerMotor.setInverted(true);
     }
 
     // Method to set the speed of both motors
     public void shoot(double speed) {
-        //m_shooter.set(speed);
         m_shooterLeaderMotor.set(speed);
         m_shooterFollowerMotor.set(speed);
     }
