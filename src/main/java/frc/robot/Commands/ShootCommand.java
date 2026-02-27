@@ -20,6 +20,8 @@ public class ShootCommand extends Command {
     
   // Instantiate Stuff
   public ShooterSubsystem m_robotShoot;
+  public SparkMax m_shooterLeaderLeftMotor;
+  public SparkMax m_shooterFollowerRightMotor;
     
 // Make the shoot command
 public ShootCommand(ShooterSubsystem robotShoot) {

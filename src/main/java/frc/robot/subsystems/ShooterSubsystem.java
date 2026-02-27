@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Limelight.LimelightHelpers;
-import frc.robot.subsystems.MAXSwerveShooterModule;
+import frc.robot.subsystems.MAXConfigure;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.math.Vector;
@@ -51,17 +51,19 @@ import com.revrobotics.RelativeEncoder;
 
 public class ShooterSubsystem extends SubsystemBase {
     // Define the leader and follower motors
-    private final MAXSwerveShooterModule m_shooter = new MAXSwerveShooterModule(
-      DriveConstants.kShooterFollowerRightMotorCanId,
+    private final MAXConfigure m_shooterLeaderLeftMotor = new MAXConfigure(
       DriveConstants.kShooterLeaderLeftMotorCanId);
 
-    public SparkMax m_shooterFollowerRightMotor; 
-    public SparkMax m_shooterLeaderLeftMotor; 
+    private final MAXConfigure m_shooterFollowerRightMotor = new MAXConfigure(
+      DriveConstants.kShooterFollowerRightMotorCanId);
+
+    public SparkMax m_shooterFollowerMotor; 
+    public SparkMax m_shooterLeaderMotor; 
 
     public ShooterSubsystem() {
         // Initialize the motors
-        m_shooterFollowerRightMotor = new SparkMax(DriveConstants.kShooterFollowerRightMotorCanId, MotorType.kBrushless);
-        m_shooterLeaderLeftMotor = new SparkMax(DriveConstants.kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
+        m_shooterFollowerMotor = new SparkMax(DriveConstants.kShooterFollowerRightMotorCanId, MotorType.kBrushless);
+        m_shooterLeaderMotor = new SparkMax(DriveConstants.kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
 
         // Optionally, invert one motor if needed
         // m_shooterFollowerMotor.setInverted(true); // Example: invert the follower motor
@@ -70,20 +72,13 @@ public class ShooterSubsystem extends SubsystemBase {
     // Method to set the speed of both motors
     public void shoot(double speed) {
         //m_shooter.set(speed);
-        m_shooterLeaderLeftMotor.set(speed);
-        m_shooterFollowerRightMotor.set(speed);
+        m_shooterLeaderMotor.set(speed);
+        m_shooterFollowerMotor.set(speed);
     }
 
     // Method to stop both motors
     public void stop() {
-        m_shooterLeaderLeftMotor.stopMotor();
-        m_shooterFollowerRightMotor.stopMotor();
+        m_shooterLeaderMotor.stopMotor();
+        m_shooterFollowerMotor.stopMotor();
     }
-    // private final MAXSwerveShooterModule m_shooter = new MAXSwerveShooterModule(
-    //     DriveConstants.kShooterLeaderLeftMotorCanId,
-    //     DriveConstants.kShooterFollowerRightMotorCanId);
-    
-    // public void shoot(double kShooterSpeed) {
-    //     m_shooter.set(kShooterSpeed);
-    //   }
 }

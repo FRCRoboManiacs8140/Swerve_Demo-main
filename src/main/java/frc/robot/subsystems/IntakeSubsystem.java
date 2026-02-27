@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Limelight.LimelightHelpers;
-import frc.robot.subsystems.MAXSwerveShooterModule;
+import frc.robot.subsystems.MAXConfigure;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.math.Vector;
@@ -51,9 +51,8 @@ import com.revrobotics.RelativeEncoder;
 
 public class IntakeSubsystem extends SubsystemBase {
     // Define the leader and follower motors
-    private final MAXSwerveShooterModule m_intake = new MAXSwerveShooterModule(
-      DriveConstants.kIntakeMotorCanId, 
-      0);
+    private final MAXConfigure m_intake = new MAXConfigure(
+      DriveConstants.kIntakeMotorCanId);
 
     public SparkMax m_intakeMotor; 
 

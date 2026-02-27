@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Limelight.LimelightHelpers;
-import frc.robot.subsystems.MAXSwerveShooterModule;
+import frc.robot.subsystems.MAXConfigure;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.math.Vector;
@@ -51,9 +51,8 @@ import com.revrobotics.RelativeEncoder;
 
 public class AgitatorSubsystem extends SubsystemBase {
     // Define the leader and follower motors
-    private final MAXSwerveShooterModule m_agitator = new MAXSwerveShooterModule(
-      DriveConstants.kAgitatorMotorCanId, 
-      0);
+    private final MAXConfigure m_agitator = new MAXConfigure(
+      DriveConstants.kAgitatorMotorCanId);
 
     public SparkMax m_agitatorMotor; 
 
