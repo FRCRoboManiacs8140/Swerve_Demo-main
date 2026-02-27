@@ -154,6 +154,10 @@ public class DriveSubsystem extends SubsystemBase {
    * @return The pose.
    */
   public Pose2d getPose() {
+    // DO NOT REMOVE!! 
+    // This is for pose estimation once we add a limelight to the robot
+
+    
     // First, tell Limelight your robot's current orientation
 //   public void updateOdometry() {
 //   m_odometry.update(
