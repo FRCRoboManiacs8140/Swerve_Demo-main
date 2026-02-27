@@ -62,7 +62,7 @@ public class ActuatorSubsystem extends SubsystemBase {
         double currentPosition = m_actuatorLeaderLeftMotor.getEncoder().getPosition();
 
         // Calculate the target position for two rotations in the opposite direction
-        double targetPosition = kActuatorRetractedPosition;
+        double targetPosition = DriveConstants.kActuatorRetractedPosition;
 
         // Run the motors until the target position is reached
         while (m_actuatorLeaderLeftMotor.getEncoder().getPosition() > targetPosition) {
