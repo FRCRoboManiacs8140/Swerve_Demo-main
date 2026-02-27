@@ -50,6 +50,11 @@ public final class Constants {
     public static final double kAgitatorSpeed = 0.5;
     public static final double kIntakeSpeed = 0.5;
     public static final double kIndexSpeed = 0.5;
+    public static final double kActuatorSpeed = 0.1;
+
+    // Actuator Positions
+    public static final double kActuatorExtendedPosition = 1.0; // Adjust as needed
+    public static final double kActuatorRetractedPosition = 0.0; // Adjust as needed
 
     // SPARK MAX CAN IDs for Drive Motors
     public static final int kFrontLeftDrivingCanId = 5;
