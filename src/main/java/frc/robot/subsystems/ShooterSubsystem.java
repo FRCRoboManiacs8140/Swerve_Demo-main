@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.subsystems.Limelight.LimelightHelpers;
 import frc.robot.subsystems.MAXConfigure;
+import frc.robot.subsystems.MotorRPMControl;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -15,19 +16,22 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 public class ShooterSubsystem extends SubsystemBase {
     // Define the leader and follower motors
-    private final MAXConfigure m_shooterLeaderLeftMotor = new MAXConfigure(
-      DriveConstants.kShooterLeaderLeftMotorCanId);
+    // private final MAXConfigure m_shooterLeaderLeftMotor = new MAXConfigure(
+    //   DriveConstants.kShooterLeaderLeftMotorCanId);
 
-    private final MAXConfigure m_shooterFollowerRightMotor = new MAXConfigure(
-      DriveConstants.kShooterFollowerRightMotorCanId);
+    // private final MAXConfigure m_shooterFollowerRightMotor = new MAXConfigure(
+    //   DriveConstants.kShooterFollowerRightMotorCanId);
 
     public SparkMax m_shooterFollowerMotor; 
     public SparkMax m_shooterLeaderMotor; 
+    public MotorRPMControl m_shooterMotorControl;
 
     public ShooterSubsystem() {
         // Initialize the motors
+        
         m_shooterFollowerMotor = new SparkMax(DriveConstants.kShooterFollowerRightMotorCanId, MotorType.kBrushless);
         m_shooterLeaderMotor = new SparkMax(DriveConstants.kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
+        m_shooterMotorControl = new MotorRPMControl(DriveConstants.kShooterLeaderLeftMotorCanId, DriveConstants.kPShooter, DriveConstants.kIShooter, DriveConstants.kDShooter); 
 
         // Invert motors if needed
         // m_shooterFollowerMotor.setInverted(true); 
@@ -36,13 +40,24 @@ public class ShooterSubsystem extends SubsystemBase {
 
     // Method to set the speed of both motors
     public void shoot(double speed) {
-        m_shooterLeaderMotor.set(speed);
-        m_shooterFollowerMotor.set(speed);
+
+        double targetRPM = 3000; // Example: 3000 RPM
+        m_shooterMotorControl.setTargetRPM(targetRPM);
+
+        // // Run for 5 seconds
+        // for (int i = 0; i < 50; i++) {
+        //     System.out.printf("Current RPM: %.2f%n", m_shooterMotorControl.getCurrentRPM());
+        //     Thread.sleep(100);
+        // }
+
+        // m_shooterMotorControl.stop();
+        // m_shooterLeaderMotor.stopMotor();
+        // m_shooterFollowerMotor.stopMotor();
     }
 
     // Method to stop both motors
     public void stop() {
         m_shooterLeaderMotor.stopMotor();
-        m_shooterFollowerMotor.stopMotor();
+       m_shooterFollowerMotor.stopMotor();
     }
 }

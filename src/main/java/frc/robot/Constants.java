@@ -46,7 +46,7 @@ public final class Constants {
     public static final double kBackRightChassisAngularOffset = Math.PI/2;
 
     // Shooter Speed 
-    public static final double kShooterSpeed = 0.1 ;
+    public static final double kShooterSpeed = 0.2 ;
     public static final double kAgitatorSpeed = 0.5;
     public static final double kIntakeSpeed = 0.5;
     public static final double kIndexSpeed = 0.5;
@@ -55,6 +55,14 @@ public final class Constants {
     // Actuator Positions
     public static final double kActuatorExtendedPosition = 1.0; // Adjust as needed
     public static final double kActuatorRetractedPosition = 0.0; // Adjust as needed
+
+    // PID Constants for Shooter Control
+    public static final double kPShooter = 0.0002;
+    public static final double kIShooter = 0.0;
+    public static final double kDShooter = 0.0;
+    public static final double kFFShooter = 0.00015; // Feed-forward term for velocity
+    public static final double kMinOutputShooter = -1.0;
+    public static final double kMaxOutputShooter = 1.0;
 
     // SPARK MAX CAN IDs for Drive Motors
     public static final int kFrontLeftDrivingCanId = 5;

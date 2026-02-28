@@ -47,7 +47,6 @@ public class MAXConfigure {
         PersistMode.kPersistParameters);
   }
 
-
   /**
    * Returns the current position of the module.
    *

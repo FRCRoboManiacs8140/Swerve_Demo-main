@@ -30,6 +30,7 @@ public ShootCommand(ShooterSubsystem robotShoot) {
     m_robotShoot = robotShoot;
 }
 
+
 // Run the shoot command
 @Override
 public void execute() {
@@ -45,7 +46,7 @@ public void end(boolean interrupted) {
 
 @Override
 public boolean isFinished() {
-    return true;
+    return false;
     // if (m_robotShoot.getPose() - m_initialDistance >= m_distance) {
     //     return true;
     // } else {
