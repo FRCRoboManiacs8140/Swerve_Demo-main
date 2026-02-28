@@ -171,7 +171,7 @@ public class RobotContainer {
     // Map the ShootCommand to the right trigger button
     new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
     .whileTrue(
-      new ShootCommand(m_robotShoot)
+      new ShootCommand(m_robotShoot, DriveConstants.kShooterTargetRPM)
     );
 
     // // Map the IntakeCommand to the right bumper button

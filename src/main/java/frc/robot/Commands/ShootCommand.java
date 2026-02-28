@@ -22,12 +22,14 @@ public class ShootCommand extends Command {
   public ShooterSubsystem m_robotShoot;
   public SparkMax m_shooterLeaderLeftMotor;
   public SparkMax m_shooterFollowerRightMotor;
+  double m_targetRPM;
     // double m_initialDistance = m_robotShoot.getPose();
     // double m_distance = 180; // Target distance
     
 // Make the shoot command
-public ShootCommand(ShooterSubsystem robotShoot) {
+public ShootCommand(ShooterSubsystem robotShoot, double targetRPM) {
     m_robotShoot = robotShoot;
+    m_targetRPM = targetRPM;
 }
 
 
@@ -35,7 +37,7 @@ public ShootCommand(ShooterSubsystem robotShoot) {
 @Override
 public void execute() {
     // This uses the speed set in Constants
-    m_robotShoot.shoot(DriveConstants.kShooterSpeed);
+    m_robotShoot.shoot(m_targetRPM);
 }
 
 // If command is interrupted or ends, stop the shooter
@@ -47,10 +49,5 @@ public void end(boolean interrupted) {
 @Override
 public boolean isFinished() {
     return false;
-    // if (m_robotShoot.getPose() - m_initialDistance >= m_distance) {
-    //     return true;
-    // } else {
-    //     return false;
-    // }
 }
 }

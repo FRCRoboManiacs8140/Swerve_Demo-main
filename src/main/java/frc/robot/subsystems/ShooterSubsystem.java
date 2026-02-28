@@ -24,14 +24,15 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public SparkMax m_shooterFollowerMotor; 
     public SparkMax m_shooterLeaderMotor; 
-    public MotorRPMControl m_shooterMotorControl;
+    public MotorRPMControl m_shooterFollowerMotorControl;
+    public MotorRPMControl m_shooterLeaderMotorControl;
 
     public ShooterSubsystem() {
         // Initialize the motors
-        
         m_shooterFollowerMotor = new SparkMax(DriveConstants.kShooterFollowerRightMotorCanId, MotorType.kBrushless);
         m_shooterLeaderMotor = new SparkMax(DriveConstants.kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
-        m_shooterMotorControl = new MotorRPMControl(DriveConstants.kShooterLeaderLeftMotorCanId, DriveConstants.kPShooter, DriveConstants.kIShooter, DriveConstants.kDShooter); 
+        m_shooterFollowerMotorControl = new MotorRPMControl(DriveConstants.kShooterFollowerRightMotorCanId, DriveConstants.kPShooter, 0, 0); 
+        m_shooterLeaderMotorControl = new MotorRPMControl(DriveConstants.kShooterLeaderLeftMotorCanId, DriveConstants.kPShooter, 0, 0);
 
         // Invert motors if needed
         // m_shooterFollowerMotor.setInverted(true); 
@@ -41,8 +42,8 @@ public class ShooterSubsystem extends SubsystemBase {
     // Method to set the speed of both motors
     public void shoot(double speed) {
 
-        double targetRPM = 3000; // Example: 3000 RPM
-        m_shooterMotorControl.setTargetRPM(targetRPM);
+        m_shooterFollowerMotorControl.setTargetRPM(speed);
+        m_shooterLeaderMotorControl.setTargetRPM(speed);
 
         // // Run for 5 seconds
         // for (int i = 0; i < 50; i++) {
