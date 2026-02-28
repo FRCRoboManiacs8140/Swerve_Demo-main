@@ -43,8 +43,8 @@ public class MAXConfigure {
     // Apply the respective configurations to the SPARKS. Reset parameters before
     // applying the configuration to bring the SPARK to a known good state. Persist
     // the settings to the SPARK to avoid losing them on a power cycle.
-    m_SparkMax.configure(Configs.MAXSwerveModule.drivingConfig, ResetMode.kResetSafeParameters,
-        PersistMode.kPersistParameters);
+    // m_SparkMax.configure(Configs.MAXSwerveModule.drivingConfig, ResetMode.kResetSafeParameters,
+    //     PersistMode.kPersistParameters);
   }
 
   /**

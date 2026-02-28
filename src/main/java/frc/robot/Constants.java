@@ -46,7 +46,7 @@ public final class Constants {
     public static final double kBackRightChassisAngularOffset = Math.PI/2;
 
     // Shooter Speed 
-    public static final double kShooterTargetRPM = 3000; ;
+    public static final double kShooterTargetRPM = 1600;
     public static final double kAgitatorSpeed = 0.5;
     public static final double kIntakeSpeed = 0.5;
     public static final double kIndexSpeed = 0.5;
