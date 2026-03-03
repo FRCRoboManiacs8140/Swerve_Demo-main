@@ -64,8 +64,8 @@ public class ShooterSubsystem extends SubsystemBase {
     double slope = 200; //300 per 3/2 feet
     double intercept = 2400;
 
-    double apriltagheight = 3.6875 // In feet. NEEDS TO BE CODED WITH LIMELIGHT
-    double limelightheight = 0.5; // In feet. NEEDS TO BE CODED WITH LIMELIGHT
+    double apriltagheight = 3.6875; // In feet. NEEDS TO BE CODED WITH LIMELIGHT
+    double limelightheight = 0.7; // In feet. NEEDS TO BE CODED WITH LIMELIGHT
 
     // System.out.printf("Slope: %.4f, Intercept: %.4f%n", slope, intercept);
 
@@ -78,9 +78,12 @@ public class ShooterSubsystem extends SubsystemBase {
     //newEncoderTicks, predictedDistance);
     }
 
-    public void setTargetRPM(double targetRPM) {
+    public void setTargetRPM(double targetRPM, double tkP, double tkI, double tkD) {
         // Get the current RPM from the encoder
         double currentRPM = m_shooterLeaderEncoder.getVelocity();
+
+        // PID Controller for shooter
+        pidController = new PIDController(tkP, tkI, tkD);
 
         // Calculate the PID output
         double output = pidController.calculate(currentRPM, targetRPM);
@@ -95,13 +98,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
     // Method to set the speed of both motors
 
-    public void shoot(double setpoint, double tkP, double tkI, double tkD) {
+    public void shoot(double setpoint) {
             // Set PID coefficients
-        // PID Controller for shooter
-        pidController = new PIDController(tkP, tkI, tkD);
 
             // Apply PID output to motor
-        setTargetRPM(setpoint/5676);
+        setTargetRPM(setpoint/5676, DriveConstants.kPShooter, DriveConstants.kIShooter, DriveConstants.kDShooter);
         SmartDashboard.putNumber("Shooter Velocity", m_shooterLeaderEncoder.getVelocity());
         
 
