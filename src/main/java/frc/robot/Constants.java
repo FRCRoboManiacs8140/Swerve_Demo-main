@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import frc.robot.subsystems.Limelight.LimelightHelpers;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -137,13 +138,13 @@ public final class Constants {
     public static final double d_rotate_to_tag = 0;
 
     // // Basic targeting data
-    // public static final  double tx = LimelightHelpers.getTX("");  // Horizontal offset from crosshair to target in degrees
-    // public static final  double ty = LimelightHelpers.getTY("");  // Vertical offset from crosshair to target in degrees
-    // public static final  double ta = LimelightHelpers.getTA("");  // Target area (0% to 100% of image)
-    // public static final  boolean hasTarget = LimelightHelpers.getTV(""); // Do you have a valid target?
+    public static final  double tx = LimelightHelpers.getTX("");  // Horizontal offset from crosshair to target in degrees
+    public static final  double ty = LimelightHelpers.getTY("");  // Vertical offset from crosshair to target in degrees
+    public static final  double ta = LimelightHelpers.getTA("");  // Target area (0% to 100% of image)
+    public static final  boolean hasTarget = LimelightHelpers.getTV(""); // Do you have a valid target?
 
-    // public static final double txnc = LimelightHelpers.getTXNC("");  // Horizontal offset from principal pixel/point to target in degrees
-    // public static final  double tync = LimelightHelpers.getTYNC("");  // Vertical  offset from principal pixel/point to target in degrees
+    public static final double txnc = LimelightHelpers.getTXNC("");  // Horizontal offset from principal pixel/point to target in degrees
+    public static final  double tync = LimelightHelpers.getTYNC("");  // Vertical  offset from principal pixel/point to target in degrees
   
   }
 }
