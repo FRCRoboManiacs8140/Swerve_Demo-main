@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.VisionConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.pathplanner.lib.config.PIDConstants;
@@ -63,10 +64,14 @@ public class ShooterSubsystem extends SubsystemBase {
     double slope = 200; //300 per 3/2 feet
     double intercept = 2400;
 
+    double apriltagheight = 3.6875 // In feet. NEEDS TO BE CODED WITH LIMELIGHT
+    double limelightheight = 0.5; // In feet. NEEDS TO BE CODED WITH LIMELIGHT
+
     // System.out.printf("Slope: %.4f, Intercept: %.4f%n", slope, intercept);
 
     // Predict distance for a new encoder reading
-    double targetDistance = 10 - 6; // In feet. NEEDS TO BE CODED WITH LIMELIGHT
+    double targetDistance = (apriltagheight-limelightheight)/Math.tan(VisionConstants.ty); // In feet. NEEDS TO BE CODED WITH LIMELIGHT
+
     double predictedRPM = slope * targetDistance + intercept;
 
     // System.out.printf("Predicted distance for %.0f ticks: %.3f meters%n",
