@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.subsystems.ShooterSubsystem;
-
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase;
+import frc.robot.subsystems.IndexSubsystem;
 
 
 
@@ -20,8 +20,9 @@ public class ShootCommand extends Command {
     
   // Instantiate Stuff
   public ShooterSubsystem m_robotShoot;
-  public SparkMax m_shooterLeaderLeftMotor;
-  public SparkMax m_shooterFollowerRightMotor;
+  public IndexSubsystem m_robotIndex;
+  //public SparkMax m_shooterLeaderLeftMotor;
+  //public SparkMax m_shooterFollowerRightMotor;
   double m_targetRPM;
     // double m_initialDistance = m_robotShoot.getPose();
     // double m_distance = 180; // Target distance
@@ -37,7 +38,7 @@ public ShootCommand(ShooterSubsystem robotShoot, double targetRPM) {
 @Override
 public void execute() {
     // This uses the speed set in Constants
-    m_robotShoot.shoot(m_targetRPM);
+    m_robotShoot.setTargetRPM(m_targetRPM);
 }
 
 // If command is interrupted or ends, stop the shooter
