@@ -41,11 +41,11 @@ public class ShooterSubsystem extends SubsystemBase {
     public ShooterSubsystem() {
         // Initialize the motors
         m_shooterFollowerMotor = new SparkMax(DriveConstants.kShooterFollowerRightMotorCanId, MotorType.kBrushless);
-        m_shooterLeaderMotor = new SparkMax(DriveConstants.kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
+        // m_shooterLeaderMotor = new SparkMax(DriveConstants.kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
         shooter_encoder = m_shooterLeaderMotor.getEncoder();
         //shooterController = new PIDController(.1, 0, 0);
-        //m_shooterFollowerMotorControl = new MotorRPMControl(DriveConstants.kShooterFollowerRightMotorCanId, DriveConstants.kPShooter, 0, 0); 
-        //m_shooterLeaderMotorControl = new MotorRPMControl(DriveConstants.kShooterLeaderLeftMotorCanId, DriveConstants.kPShooter, 0, 0);
+        // m_shooterFollowerMotorControl = new MotorRPMControl(DriveConstants.kShooterFollowerRightMotorCanId, DriveConstants.kPShooter, 0, 0); 
+        m_shooterLeaderMotorControl = new MotorRPMControl(DriveConstants.kShooterLeaderLeftMotorCanId, DriveConstants.kPShooter, 0, 0);
 
         // Invert motors if needed
         // m_shooterFollowerMotor.setInverted(true); 
@@ -75,7 +75,7 @@ public class ShooterSubsystem extends SubsystemBase {
     public void shoot(double setpoint) {
             // Set PID coefficients
             // Apply PID output to motor
-        m_shooterLeaderMotor.set(setpoint/5676);
+        m_shooterLeaderMotorControl.setTargetRPM(setpoint/5676);
         SmartDashboard.putNumber("Shooter Velocity", shooter_encoder.getVelocity());
         
 

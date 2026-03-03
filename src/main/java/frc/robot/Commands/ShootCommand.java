@@ -38,7 +38,7 @@ public ShootCommand(ShooterSubsystem robotShoot, double targetRPM) {
 @Override
 public void execute() {
     // This uses the speed set in Constants
-    m_robotShoot.setTargetRPM(m_targetRPM);
+    m_robotShoot.shoot(m_targetRPM);
 }
 
 // If command is interrupted or ends, stop the shooter
