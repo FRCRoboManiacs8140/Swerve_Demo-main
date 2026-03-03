@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.subsystems.Limelight.LimelightHelpers;
 import frc.robot.subsystems.MAXConfigure;
-import frc.robot.subsystems.MotorRPMControl;
+// import frc.robot.subsystems.MotorRPMControl;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.math.controller.PIDController;
-// import edu.wpi.first.math.LinearRegression;
+import edu.wpi.first.math.controller.PIDController; 
 import java.util.Arrays;
 
 
@@ -29,9 +29,12 @@ public class ShooterSubsystem extends SubsystemBase {
     public SparkMax m_shooterFollowerMotor; 
     public SparkMax m_shooterLeaderMotor; 
     public PIDController shooterController;
-    public RelativeEncoder shooter_encoder;
-    public MotorRPMControl m_shooterFollowerMotorControl;
-    public MotorRPMControl m_shooterLeaderMotorControl;
+    public RelativeEncoder m_shooterLeaderEncoder;
+    private PIDController pidController;
+
+
+    // public MotorRPMControl m_shooterFollowerMotorControl;
+    // public MotorRPMControl m_shooterLeaderMotorControl;
     
     // private final RelativeEncoder shooter_encoder = m_shooterLeaderMotor.getEncoder();
     // PIDController shooterController = new PIDController(.1, 0, 0);
@@ -40,12 +43,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public ShooterSubsystem() {
         // Initialize the motors
-        m_shooterFollowerMotor = new SparkMax(DriveConstants.kShooterFollowerRightMotorCanId, MotorType.kBrushless);
-        // m_shooterLeaderMotor = new SparkMax(DriveConstants.kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
-        shooter_encoder = m_shooterLeaderMotor.getEncoder();
+        // m_shooterFollowerMotor = new SparkMax(DriveConstants.kShooterFollowerRightMotorCanId, MotorType.kBrushless);
+        m_shooterLeaderMotor = new SparkMax(DriveConstants.kShooterLeaderLeftMotorCanId, MotorType.kBrushless);
+        m_shooterLeaderEncoder = m_shooterLeaderMotor.getEncoder();
         //shooterController = new PIDController(.1, 0, 0);
         // m_shooterFollowerMotorControl = new MotorRPMControl(DriveConstants.kShooterFollowerRightMotorCanId, DriveConstants.kPShooter, 0, 0); 
-        m_shooterLeaderMotorControl = new MotorRPMControl(DriveConstants.kShooterLeaderLeftMotorCanId, DriveConstants.kPShooter, 0, 0);
+        // m_shooterLeaderMotorControl = new MotorRPMControl(DriveConstants.kShooterLeaderLeftMotorCanId, DriveConstants.kPShooter, 0, 0);
 
         // Invert motors if needed
         // m_shooterFollowerMotor.setInverted(true); 
@@ -70,13 +73,31 @@ public class ShooterSubsystem extends SubsystemBase {
     //newEncoderTicks, predictedDistance);
     }
 
+    public void setTargetRPM(double targetRPM) {
+        // Get the current RPM from the encoder
+        double currentRPM = m_shooterLeaderEncoder.getVelocity();
+
+        // Calculate the PID output
+        double output = pidController.calculate(currentRPM, targetRPM);
+
+        // Set the motor speed (clamp output to [-1.0, 1.0])
+        m_shooterLeaderMotor.set(Math.max(-1.0, Math.min(1.0, output)));
+    }
+
+    public double getCurrentRPM() {
+        return m_shooterLeaderEncoder.getVelocity();
+    }
+
     // Method to set the speed of both motors
 
-    public void shoot(double setpoint) {
+    public void shoot(double setpoint, double tkP, double tkI, double tkD) {
             // Set PID coefficients
+        // PID Controller for shooter
+        pidController = new PIDController(tkP, tkI, tkD);
+
             // Apply PID output to motor
-        m_shooterLeaderMotorControl.setTargetRPM(setpoint/5676);
-        SmartDashboard.putNumber("Shooter Velocity", shooter_encoder.getVelocity());
+        setTargetRPM(setpoint/5676);
+        SmartDashboard.putNumber("Shooter Velocity", m_shooterLeaderEncoder.getVelocity());
         
 
        // m_shooterFollowerMotorControl.setTargetRPM(speed);
